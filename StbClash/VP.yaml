@@ -1,0 +1,35 @@
+---
+proxies:
+  - name: "P-UnivOne"
+    type: vmess
+    server: "104.17.3.81"
+    port: 443
+    uuid: fbf78c1f-6f42-45e0-a1a9-67de703b90f8
+    alterId: 0
+    cipher: none
+    udp: true
+    skip-cert-verify: true
+    tls: true
+    servername: "api.midtrans.com"
+    network: ws
+    ws-opts:
+      path: "ws://api.midtrans.com/fastssh/univ/62fd36ef49a0b/"
+      headers:
+        Host: sg3.v2-ray.com
+        
+  - name: "P-UnivTwo"
+    type: vmess
+    server: "104.17.3.81"
+    port: 443
+    uuid: fbf78c1f-6f42-45e0-a1a9-67de703b90f8
+    alterId: 0
+    cipher: none
+    udp: true
+    skip-cert-verify: true
+    tls: true
+    servername: "api.midtrans.com"
+    network: ws
+    ws-opts:
+      path: "ws://api.midtrans.com/fastssh/unver/62fd389a9bd49/"
+      headers:
+        Host: sg3.v2-ray.com
