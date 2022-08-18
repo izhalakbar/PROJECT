@@ -1,31 +1,95 @@
 ---
+# ================= ZILNET META ==================
 rule-providers:
   RP-Direct:
     type: http
     behavior: classical
     path: "./rule_provider/direct.yaml"
     url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/rule_provider/direct.yaml
+    interval: 86400
   RP-Gaming:
     type: http
     behavior: classical
     path: "./rule_provider/gaming.yaml"
     url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/rule_provider/gaming.yaml
+    interval: 86400
   RP-Reject:
     type: http
     behavior: classical
     path: "./rule_provider/reject.yaml"
     url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/rule_provider/reject.yaml
+    interval: 86400
   RP-Sosmed:
     type: http
     behavior: classical
     path: "./rule_provider/sosmed.yaml"
     url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/rule_provider/sosmed.yaml
+    interval: 86400
   RP-Streaming:
     type: http
     behavior: classical
     path: "./rule_provider/streaming.yaml"
     url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/rule_provider/streaming.yaml
+    interval: 86400
+# ================= ZILNET META ==================
+proxy-providers:
+  PUniversal:
+    type: http
+    url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/proxy_provider/Universal.yaml
+    path: "./proxy_provider/Universal.yaml"
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 300
+  PGame:
+    type: http
+    url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/proxy_provider/Game.yaml
+    path: "./proxy_provider/Game.yaml"
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 300
+  PSosmed:
+    type: http
+    url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/proxy_provider/Sosmed.yaml
+    path: "./proxy_provider/Sosmed.yaml"
+    filter: sosmed
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 300
+  PStream:
+    type: http
+    url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/proxy_provider/Stream.yaml
+    path: "./proxy_provider/Stream.yaml"
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 300
+geodata-mode: false
+geodata-loader: memconservative
+tcp-concurrent: true
+sniffer:
+  enable: true
+  sniffing:
+  - tls
+  - http
+authentication:
+- Clash:oHeRh67o
+
+# ================= ZILNET META ==================
 proxy-groups:
+- name: GLoadBalance
+  type: load-balance
+  strategy: consistent-hashing
+  disable-udp: false
+  proxies:
+  - GUniversal
+  - GGame
+  - GSosmedOne
+  - GStream
+  url: http://www.gstatic.com/generate_204
+  interval: '300'
 - name: GUniversal
   type: url-test
   disable-udp: false
@@ -42,17 +106,6 @@ proxy-groups:
   url: http://www.gstatic.com/generate_204
   interval: '300'
   tolerance: '150'
-- name: GLoadBalance
-  type: load-balance
-  strategy: consistent-hashing
-  disable-udp: false
-  proxies:
-  - GUniversal
-  - GGame
-  - GSosmedOne
-  - GStream
-  url: http://www.gstatic.com/generate_204
-  interval: '300'
 - name: GSosmedOne
   type: select
   disable-udp: false
@@ -65,6 +118,7 @@ proxy-groups:
   disable-udp: false
   use:
   - PStream
+# ================= ZILNET META ==================
 dns:
   nameserver:
   - 1.1.1.1
@@ -118,47 +172,4 @@ rules:
 - RULE-SET,RP-Direct,DIRECT
 - RULE-SET,RP-Reject,REJECT
 - MATCH,GLOBAL
-proxy-providers:
-  PUniversal:
-    type: http
-    url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/proxy_provider/Universal.yaml
-    path: "./proxy_provider/Universal.yaml"
-    health-check:
-      enable: true
-      url: http://www.gstatic.com/generate_204
-      interval: 300
-  PGame:
-    type: http
-    url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/proxy_provider/Game.yaml
-    path: "./proxy_provider/Game.yaml"
-    health-check:
-      enable: true
-      url: http://www.gstatic.com/generate_204
-      interval: 300
-  PSosmed:
-    type: http
-    url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/proxy_provider/Sosmed.yaml
-    path: "./proxy_provider/Sosmed.yaml"
-    filter: sosmed
-    health-check:
-      enable: true
-      url: http://www.gstatic.com/generate_204
-      interval: 300
-  PStream:
-    type: http
-    url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/proxy_provider/Stream.yaml
-    path: "./proxy_provider/Stream.yaml"
-    health-check:
-      enable: true
-      url: http://www.gstatic.com/generate_204
-      interval: 300
-geodata-mode: false
-geodata-loader: memconservative
-tcp-concurrent: true
-sniffer:
-  enable: true
-  sniffing:
-  - tls
-  - http
-authentication:
-- Clash:oHeRh67o
+# ================= ZILNET META ==================
