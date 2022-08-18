@@ -114,21 +114,24 @@ rules:
 - MATCH,GLOBAL
 proxy-providers:
   PUniversal:
-    type: file
+    type: http
+    url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/proxy_provider/Universal.yaml
     path: "./proxy_provider/Universal.yaml"
     health-check:
       enable: true
       url: http://www.gstatic.com/generate_204
       interval: 300
   PGame:
-    type: file
+    type: http
+    url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/proxy_provider/Game.yaml
     path: "./proxy_provider/Game.yaml"
     health-check:
       enable: true
       url: http://www.gstatic.com/generate_204
       interval: 300
   PSosmed:
-    type: file
+    type: http
+    url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/proxy_provider/Sosmed.yaml
     path: "./proxy_provider/Sosmed.yaml"
     filter: sosmed
     health-check:
@@ -137,6 +140,7 @@ proxy-providers:
       interval: 300
   PStream:
     type: file
+    url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/proxy_provider/Stream.yaml
     path: "./proxy_provider/Stream.yaml"
     health-check:
       enable: true
