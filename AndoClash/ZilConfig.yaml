@@ -66,17 +66,6 @@ proxy-providers:
       enable: true
       url: http://www.gstatic.com/generate_204
       interval: 300
-geodata-mode: false
-geodata-loader: memconservative
-tcp-concurrent: true
-sniffer:
-  enable: true
-  sniffing:
-  - tls
-  - http
-authentication:
-- Clash:oHeRh67o
-
 # ================= ZILNET META ==================
 proxy-groups:
 - name: GLoadBalance
@@ -160,8 +149,20 @@ allow-lan: true
 external-controller: 0.0.0.0:9090
 secret: ""
 bind-address: "*"
-external-ui: "/usr/share/openclash/ui"
+external-ui: folder
 ipv6: false
+
+geodata-mode: false
+geodata-loader: memconservative
+tcp-concurrent: true
+sniffer:
+  enable: true
+  sniffing:
+  - tls
+  - http
+authentication:
+- Clash:oHeRh67o
+
 profile:
   store-selected: true
   store-fake-ip: true
@@ -172,4 +173,5 @@ rules:
 - RULE-SET,RP-Direct,DIRECT
 - RULE-SET,RP-Reject,REJECT
 - MATCH,GLOBAL
+
 # ================= ZILNET META ==================
