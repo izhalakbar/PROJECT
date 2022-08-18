@@ -161,14 +161,13 @@ iptables:
   inbound-interface: en0 # detect the inbound interface, default is 'lo'
   
 rules:
+  
   # network(tcp/udp) condition for all rules
   - DOMAIN-SUFFIX,bilibili.com,DIRECT,tcp
   - DOMAIN-SUFFIX,bilibili.com,REJECT,udp
   
   # multiport condition for rules SRC-PORT and DST-PORT
   - DST-PORT,123/136/137-139,DIRECT,udp
-  - DST-PORT,7895,REJECT
-  - DST-PORT,7892,REJECT
   
   # rule GEOSITE
   - GEOSITE,category-ads-all,DIRECT
@@ -193,15 +192,13 @@ rules:
   
   # sumber kondisi IPCIDR untuk semua aturan di proxy gateway
   #- GEOSITE,geolocation-!cn,REJECT,192.168.1.88/32,192.168.1.99/32
-
   - GEOIP,private,DIRECT,no-resolve
   - GEOIP,cn,DIRECT
-  - RULE-SET,RP-Direct,DIRECT
-  - RULE-SET,RP-Reject,REJECT
   - RULE-SET,RP-Gaming,🚀 GGame
   - RULE-SET,RP-Sosmed,🚀 GSosmed
   - RULE-SET,RP-Streaming,🚀 GStream
-  - MATCH,GLOBAL
+  - MATCH,🚀 GLoadBalance
+  
   
   
 
