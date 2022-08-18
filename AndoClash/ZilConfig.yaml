@@ -68,7 +68,7 @@ proxy-providers:
       interval: 300
 # ================= ZILNET META ==================
 proxy-groups:
-- name: GLoadBalance
+- name: 🚀 GLoadBalance
   type: load-balance
   strategy: consistent-hashing
   disable-udp: false
@@ -79,7 +79,7 @@ proxy-groups:
     - GStream
   url: http://www.gstatic.com/generate_204
   interval: '300'
-- name: GUniversal
+- name: 🚀 GUniversal
   type: url-test
   disable-udp: false
   use:
@@ -87,7 +87,7 @@ proxy-groups:
   url: http://www.gstatic.com/generate_204
   interval: '300'
   tolerance: '150'
-- name: GGame
+- name: 🚀 GGame
   type: url-test
   disable-udp: false
   use:
@@ -95,14 +95,14 @@ proxy-groups:
   url: http://www.gstatic.com/generate_204
   interval: '300'
   tolerance: '150'
-- name: GSosmedOne
+- name: 🚀 GSosmed
   type: select
   disable-udp: false
   use:
     - PSosmed
   url: http://www.gstatic.com/generate_204
   interval: '300'
-- name: GStream
+- name: 🚀 GStream
   type: select
   disable-udp: false
   use:
@@ -161,11 +161,49 @@ iptables:
   inbound-interface: en0 # detect the inbound interface, default is 'lo'
   
 rules:
+  # network(tcp/udp) condition for all rules
+  - DOMAIN-SUFFIX,bilibili.com,DIRECT,tcp
+  - DOMAIN-SUFFIX,bilibili.com,REJECT,udp
+  
+  # multiport condition for rules SRC-PORT and DST-PORT
+  - DST-PORT,123/136/137-139,DIRECT,udp
   - DST-PORT,7895,REJECT
   - DST-PORT,7892,REJECT
+  
+  # rule GEOSITE
+  - GEOSITE,category-ads-all,DIRECT
+  - GEOSITE,icloud@cn,DIRECT
+  - GEOSITE,apple@cn,DIRECT
+  - GEOSITE,apple-cn,DIRECT
+  - GEOSITE,microsoft@cn,DIRECT
+  - GEOSITE,geolocation-cn,DIRECT
+  
+  - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
+  - IP-CIDR,10.0.0.0/8,DIRECT,no-resolve
+  - IP-CIDR,172.16.0.0/12,DIRECT,no-resolve
+  - IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
+  - IP-CIDR,100.64.0.0/10,DIRECT,no-resolve
+  - IP-CIDR6,::1/128,DIRECT,no-resolve
+  - IP-CIDR6,fc00::/7,DIRECT,no-resolve
+  - IP-CIDR6,fe80::/10,DIRECT,no-resolve
+  - IP-CIDR6,fd00::/8,DIRECT,no-resolve
+  - SRC-IP-CIDR,192.168.1.201/32,DIRECT
   - IP-CIDR,198.18.0.1/16,REJECT,no-resolve
+  - GEOIP,IR,DIRECT
+  
+  # sumber kondisi IPCIDR untuk semua aturan di proxy gateway
+  #- GEOSITE,geolocation-!cn,REJECT,192.168.1.88/32,192.168.1.99/32
+
+  - GEOIP,private,DIRECT,no-resolve
+  - GEOIP,cn,DIRECT
   - RULE-SET,RP-Direct,DIRECT
   - RULE-SET,RP-Reject,REJECT
-  - MATCH,GLOBAL
+  - RULE-SET,RP-Gaming,🚀 GGame
+  - RULE-SET,RP-Sosmed,🚀 GSosmed
+  - RULE-SET,RP-Streaming,🚀 GStream
+  - MATCH,🚀 GLoadBalance
+  
+  
+
 
 # ================= ZILNET META ==================
