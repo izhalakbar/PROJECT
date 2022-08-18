@@ -32,7 +32,7 @@ rule-providers:
     interval: 86400
     
 proxy-groups:
-  - name: GUniversal
+  - name: 🚀 GUniversal
     type: url-test
     disable-udp: false
     use:
@@ -40,7 +40,7 @@ proxy-groups:
     url: http://www.gstatic.com/generate_204
     interval: '300'
     tolerance: '150'
-  - name: GGame
+  - name: 🚀 GGame
     type: url-test
     disable-udp: false
     use:
@@ -48,25 +48,25 @@ proxy-groups:
     url: http://www.gstatic.com/generate_204
     interval: '300'
     tolerance: '150'
-  - name: GLoadBalance
+  - name: 🚀 GLoadBalance
     type: load-balance
     strategy: consistent-hashing
     disable-udp: false
     proxies:
-    - GUniversal
-    - GGame
-    - GSosmedOne
-    - GStream
+    - 🚀 GUniversal
+    - 🚀 GGame
+    - 🚀 GSosmed
+    - 🚀 GStream
     url: http://www.gstatic.com/generate_204
     interval: '300'
-  - name: GSosmedOne
+  - name: 🚀 GSosmed
     type: select
     disable-udp: false
     use:
     - PSosmed
     url: http://www.gstatic.com/generate_204
     interval: '300'
-  - name: GStream
+  - name: 🚀 GStream
     type: select
     disable-udp: false
     use:
@@ -143,3 +143,7 @@ rules:
   - RULE-SET,RP-Reject,REJECT
   - MATCH,GLOBAL
       
+  - RULE-SET,RP-Gaming,🚀 GGame
+  - RULE-SET,RP-Sosmed,🚀 GSosmed
+  - RULE-SET,RP-Streaming,🚀 GStream
+  - MATCH,🚀 GUniversal
