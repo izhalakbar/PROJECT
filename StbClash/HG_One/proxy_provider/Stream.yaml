@@ -1,7 +1,7 @@
 # ================= ZILNET META ==================
 ---
 proxies:
-- name: streaming
+- name: streaming-one
   type: vless
   server: 104.17.3.81
   port: 443
@@ -13,5 +13,19 @@ proxies:
   network: ws
   ws-opts:
     path: ws://api.midtrans.com/fastssh/pstream/62fdeea6c0339/
+    headers:
+      Host: sg1.vless.co
+- name: streaming-two
+  type: vless
+  server: 104.17.3.81
+  port: 443
+  uuid: 81f1f510-3ca7-4734-8956-0f4fce670af5
+  udp: true
+  skip-cert-verify: true
+  tls: true
+  servername: api.midtrans.com
+  network: ws
+  ws-opts:
+    path: ws://api.midtrans.com/fastssh/pstream1/62fe7e0eee6ea/
     headers:
       Host: sg1.vless.co
