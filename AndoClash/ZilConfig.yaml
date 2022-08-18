@@ -110,65 +110,55 @@ proxy-groups:
 # ================= ZILNET META ==================
 dns:
   enable: true
+  use-hosts: true
   ipv6: false
   enhanced-mode: redir-host
-  listen: 0.0.0.0:7874
-  fake-ip-filter:
-  - "+.*"
+  fake-ip-range: 198.18.0.1/16
+  listen: 127.0.0.1:6868
+  default-nameserver:
+    - 1.1.1.1
+    - 8.8.8.8
+    - 119.29.29.29
+    - 114.114.114.114
   nameserver:
     - 1.1.1.1
     - 8.8.8.8
     - tcp://1.1.1.1
     - tcp://8.8.8.8
     - https://doh.pub/dns-query
-    - https://dns.adguard.com/dns-query
-    - https://dns-google.com/dns-query
-    - tls://dns.adguard.com
-    - tls://dns-google.com/
     - tls://223.5.5.5:853
-    - 192.168.151.108
-    - 8.8.4.4
-    - https://dns.google/dns-query
-    - tls://dns.google
-  default-nameserver:
-    - 1.1.1.1
+  fallback:
     - 1.0.0.1
-    - 119.29.29.29
-    - 114.114.114.114
-    - 192.168.151.108
-    - 8.8.8.8
     - 8.8.4.4
-    
-  
-redir-port: 7892
-tproxy-port: 7895
-port: 7890
-socks-port: 7891
-mixed-port: 7893
-mode: rule
-log-level: silent
-allow-lan: true
-external-controller: 0.0.0.0:9090
-secret: ""
-bind-address: "*"
-external-ui: folder
-ipv6: false
+    - https://1.1.1.1/dns-query
+    - https://8.8.8.8/dns-query
+    - 112.215.37.165
+    - https://1.0.0.1/dns-query  # append the proxy adapter name or group name to the end of DNS URL with '#' prefix.
+    - tls://8.8.4.4:853
+  fallback-filter:
+    geoip: false
+    geosite:
+      - gfw  # `geosite` filter only use fallback server to resolve ip, prevent DNS leaks to unsafe DNS providers.
+    domain:
+      - +.example.com
+    ipcidr:
+      - 0.0.0.0/32
 
-geodata-mode: false
-geodata-loader: memconservative
-tcp-concurrent: true
-
-sniffer:
+# Enable the TUN listener
+tun:
   enable: true
-  sniffing:
-  - tls
-  - http
-authentication:
-  - Clash:oHeRh67o
+  stack: gvisor #  only gvisor
+  dns-hijack: 
+    - tcp://8.8.8.8:53
+    - tcp://8.8.4.4:53
+  auto-route: true # auto set global route
+  
+# Enable the TPROXY listener
+tproxy-port: 9898
 
-profile:
-  store-selected: true
-  store-fake-ip: true
+iptables:
+  enable: true # default is false
+  inbound-interface: en0 # detect the inbound interface, default is 'lo'
   
 rules:
   - DST-PORT,7895,REJECT
