@@ -73,17 +73,17 @@ proxy-groups:
   strategy: consistent-hashing
   disable-udp: false
   proxies:
-  - GUniversal
-  - GGame
-  - GSosmedOne
-  - GStream
+    - GUniversal
+    - GGame
+    - GSosmedOne
+    - GStream
   url: http://www.gstatic.com/generate_204
   interval: '300'
 - name: GUniversal
   type: url-test
   disable-udp: false
   use:
-  - PUniversal
+    - PUniversal
   url: http://www.gstatic.com/generate_204
   interval: '300'
   tolerance: '150'
@@ -91,7 +91,7 @@ proxy-groups:
   type: url-test
   disable-udp: false
   use:
-  - PGame
+    - PGame
   url: http://www.gstatic.com/generate_204
   interval: '300'
   tolerance: '150'
@@ -99,14 +99,14 @@ proxy-groups:
   type: select
   disable-udp: false
   use:
-  - PSosmed
+    - PSosmed
   url: http://www.gstatic.com/generate_204
   interval: '300'
 - name: GStream
   type: select
   disable-udp: false
   use:
-  - PStream
+    - PStream
 # ================= ZILNET META ==================
 dns:
   enable: true
@@ -164,18 +164,18 @@ sniffer:
   - tls
   - http
 authentication:
-- Clash:oHeRh67o
+  - Clash:oHeRh67o
 
 profile:
   store-selected: true
   store-fake-ip: true
   
 rules:
-- DST-PORT,7895,REJECT
-- DST-PORT,7892,REJECT
-- IP-CIDR,198.18.0.1/16,REJECT,no-resolve
-- RULE-SET,RP-Direct,DIRECT
-- RULE-SET,RP-Reject,REJECT
-- MATCH,GLOBAL
+  - DST-PORT,7895,REJECT
+  - DST-PORT,7892,REJECT
+  - IP-CIDR,198.18.0.1/16,REJECT,no-resolve
+  - RULE-SET,RP-Direct,DIRECT
+  - RULE-SET,RP-Reject,REJECT
+  - MATCH,GLOBAL
 
 # ================= ZILNET META ==================
