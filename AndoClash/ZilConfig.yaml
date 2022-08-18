@@ -108,16 +108,6 @@ proxy-providers:
       interval: 300
       
 dns:
-  nameserver:
-    - https://dns.adguard.com/dns-query
-    - https://dns-google.com/dns-query
-    - tls://dns.adguard.com
-    - tls://dns-google.com/
-    - 192.168.151.108
-    - 8.8.8.8
-    - 8.8.4.4
-    - https://dns.google/dns-query
-    - tls://dns.google
   enable: true
   ipv6: false
   enhanced-mode: redir-host
@@ -125,11 +115,25 @@ dns:
   fake-ip-filter:
   - "+.*"
   default-nameserver:
-    - 192.168.9.1
-    - 192.168.8.1
-    - 192.168.151.108
+    - 1.1.1.1
     - 8.8.8.8
-    - 8.8.4.4
+    - 192.168.151.108
+    - 119.29.29.29
+    - 114.114.114.114
+  nameserver:
+    - 1.1.1.1
+    - 8.8.8.8
+    - 192.168.151.108
+    - tcp://1.1.1.1
+    - tcp://8.8.8.8
+    - https://doh.pub/dns-query
+    - tls://223.5.5.5:853
+    - https://dns.adguard.com/dns-query
+    - https://dns-google.com/dns-query
+    - tls://dns.adguard.com
+    - tls://dns-google.com/
+    - https://dns.google/dns-query
+    - tls://dns.google
 
 rules:
   - DST-PORT,7895,REJECT
