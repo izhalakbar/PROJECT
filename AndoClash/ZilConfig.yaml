@@ -159,16 +159,16 @@ rules:
   - GEOSITE,apple@cn,DIRECT
   - GEOSITE,apple-cn,DIRECT
   - GEOSITE,microsoft@cn,DIRECT
-  - GEOSITE,facebook,PROXY
-  - GEOSITE,youtube,PROXY
+  - GEOSITE,facebook,🚀 GSosmed
+  - GEOSITE,youtube,🚀 GStrean
   - GEOSITE,geolocation-cn,DIRECT
   - GEOSITE,geolocation-!cn,PROXY
     
   # source IPCIDR condition for all rules in gateway proxy
   #- GEOSITE,geolocation-!cn,REJECT,192.168.1.88/32,192.168.1.99/32
 
-  - GEOIP,telegram,PROXY,no-resolve
+  - GEOIP,telegram,🚀 GSosmed,no-resolve
   - GEOIP,private,DIRECT,no-resolve
   - GEOIP,cn,DIRECT
   
-  - MATCH,PROXY
+  - MATCH,🚀 GLoadBalance
