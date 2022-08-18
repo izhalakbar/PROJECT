@@ -138,6 +138,7 @@ dns:
   - 192.168.151.108
   - 8.8.8.8
   - 8.8.4.4
+  
 redir-port: 7892
 tproxy-port: 7895
 port: 7890
@@ -155,6 +156,7 @@ ipv6: false
 geodata-mode: false
 geodata-loader: memconservative
 tcp-concurrent: true
+
 sniffer:
   enable: true
   sniffing:
@@ -166,6 +168,7 @@ authentication:
 profile:
   store-selected: true
   store-fake-ip: true
+  
 rules:
 - DST-PORT,7895,REJECT
 - DST-PORT,7892,REJECT
