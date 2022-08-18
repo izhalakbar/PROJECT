@@ -38,16 +38,18 @@ proxy-groups:
     use:
     - PUniversal
     url: http://www.gstatic.com/generate_204
-    interval: '300'
-    tolerance: '150'
+    interval: 180
+    lazy: true
+    
   - name: 🚀 GGame
     type: url-test
     disable-udp: false
     use:
     - PGame
     url: http://www.gstatic.com/generate_204
-    interval: '300'
-    tolerance: '150'
+    interval: 180
+    lazy: true
+    
   - name: 🚀 GLoadBalance
     type: load-balance
     strategy: consistent-hashing
@@ -58,20 +60,22 @@ proxy-groups:
     - 🚀 GSosmed
     - 🚀 GStream
     url: http://www.gstatic.com/generate_204
-    interval: '300'
+    interval: 300
+    
   - name: 🚀 GSosmed
     type: select
     disable-udp: false
     use:
     - PSosmed
+    filter: 'sosmed'
     url: http://www.gstatic.com/generate_204
-    interval: '300'
+    interval: 300
   - name: 🚀 GStream
     type: select
     disable-udp: false
     use:
     - PStream
-    
+    filter: 'streaming'
 proxy-providers:
   PUniversal:
     type: http
@@ -109,39 +113,62 @@ proxy-providers:
       
 dns:
   enable: true
+  use-hosts: true
   ipv6: false
   enhanced-mode: redir-host
-  listen: 0.0.0.0:7874
-  fake-ip-filter:
-  - "+.*"
+  fake-ip-range: 198.18.0.1/16
+  listen: 127.0.0.1:6868
   default-nameserver:
-    - 1.1.1.1
-    - 8.8.8.8
-    - 192.168.151.108
     - 119.29.29.29
     - 114.114.114.114
   nameserver:
-    - 1.1.1.1
-    - 8.8.8.8
-    - 192.168.151.108
-    - tcp://1.1.1.1
-    - tcp://8.8.8.8
     - https://doh.pub/dns-query
     - tls://223.5.5.5:853
-    - https://dns.adguard.com/dns-query
-    - https://dns-google.com/dns-query
-    - tls://dns.adguard.com
-    - tls://dns-google.com/
-    - https://dns.google/dns-query
-    - tls://dns.google
-
+  fallback:
+    - 'https://1.0.0.1/dns-query'  # append the proxy adapter name or group name to the end of DNS URL with '#' prefix.
+    - 'tls://8.8.4.4:853'
+  fallback-filter:
+    geoip: false
+    geosite:
+      - gfw  # `geosite` filter only use fallback server to resolve ip, prevent DNS leaks to unsafe DNS providers.
+    domain:
+      - +.example.com
+    ipcidr:
+      - 0.0.0.0/32
+      
+# Enable the TUN listener
+tun:
+  enable: true
+  stack: gvisor #  only gvisor
+  dns-hijack: 
+    - 0.0.0.0:53 # additional dns server listen on TUN
+  auto-route: true # auto set global route
+  
 rules:
-  - DST-PORT,7895,REJECT
-  - DST-PORT,7892,REJECT
-  - IP-CIDR,198.18.0.1/16,REJECT,no-resolve
-  - RULE-SET,RP-Direct,DIRECT
-  - RULE-SET,RP-Reject,REJECT
-  - RULE-SET,RP-Gaming,🚀 GGame
-  - RULE-SET,RP-Sosmed,🚀 GSosmed
-  - RULE-SET,RP-Streaming,🚀 GStream
-  - MATCH,🚀 GUniversal
+
+  # network(tcp/udp) condition for all rules
+  - DOMAIN-SUFFIX,bilibili.com,DIRECT,tcp
+  - DOMAIN-SUFFIX,bilibili.com,REJECT,udp
+    
+  # multiport condition for rules SRC-PORT and DST-PORT
+  - DST-PORT,123/136/137-139,DIRECT,udp
+  
+  # rule GEOSITE
+  - GEOSITE,category-ads-all,REJECT
+  - GEOSITE,icloud@cn,DIRECT
+  - GEOSITE,apple@cn,DIRECT
+  - GEOSITE,apple-cn,DIRECT
+  - GEOSITE,microsoft@cn,DIRECT
+  - GEOSITE,facebook,PROXY
+  - GEOSITE,youtube,PROXY
+  - GEOSITE,geolocation-cn,DIRECT
+  - GEOSITE,geolocation-!cn,PROXY
+    
+  # source IPCIDR condition for all rules in gateway proxy
+  #- GEOSITE,geolocation-!cn,REJECT,192.168.1.88/32,192.168.1.99/32
+
+  - GEOIP,telegram,PROXY,no-resolve
+  - GEOIP,private,DIRECT,no-resolve
+  - GEOIP,cn,DIRECT
+  
+  - MATCH,PROXY
