@@ -73,10 +73,10 @@ proxy-groups:
   strategy: consistent-hashing
   disable-udp: false
   proxies:
-    - GUniversal
-    - GGame
-    - GSosmedOne
-    - GStream
+    - 🚀 GUniversal
+    - 🚀 GGame
+    - 🚀 GSosmed
+    - 🚀 GStream
   url: http://www.gstatic.com/generate_204
   interval: '300'
 - name: 🚀 GUniversal
