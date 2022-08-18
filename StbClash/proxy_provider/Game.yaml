@@ -1,7 +1,7 @@
 # ================= ZILNET META ==================
 ---
 proxies:
-- name: gameone
+- name: game_one
   type: vless
   server: 104.17.3.81
   port: 443
@@ -15,7 +15,7 @@ proxies:
     path: ws://api.midtrans.com/fastssh/asew/62fd502c43c72/
     headers:
       Host: sg2.vless.co
-- name: gametwo
+- name: game_two
   type: vless
   server: 104.17.3.81
   port: 443
