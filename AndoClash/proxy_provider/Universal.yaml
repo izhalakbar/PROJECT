@@ -1,0 +1,31 @@
+# ================= ZILNET META ==================
+---
+proxies:
+- name: 1universal-one
+  type: vless
+  server: 104.17.3.81
+  port: 443
+  uuid: 81f1f510-3ca7-4734-8956-0f4fce670af5
+  udp: true
+  skip-cert-verify: true
+  tls: true
+  servername: api.midtrans.com
+  network: ws
+  ws-opts:
+    path: ws://api.midtrans.com/fastssh/asew/62fd502c43c72/
+    headers:
+      Host: sg2.vless.co
+- name: 2universal-two
+  type: vless
+  server: 104.17.3.81
+  port: 443
+  uuid: 81f1f510-3ca7-4734-8956-0f4fce670af5
+  udp: true
+  skip-cert-verify: true
+  tls: true
+  servername: api.midtrans.com
+  network: ws
+  ws-opts:
+    path: ws://api.midtrans.com/fastssh/susah/62fd651ea75e6/
+    headers:
+      Host: sg1.vless.co
