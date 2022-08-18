@@ -30,7 +30,7 @@ rule-providers:
     path: "./streaming.yaml"
     url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/rule_provider/direct.yaml
     interval: 86400
-    
+# ================= ZILNET META ==================
 proxy-groups:
   - name: 🚀 GUniversal
     type: url-test
@@ -76,6 +76,7 @@ proxy-groups:
     use:
     - PStream
     filter: 'streaming'
+# ================= ZILNET META ==================
 proxy-providers:
   PUniversal:
     type: http
@@ -110,7 +111,7 @@ proxy-providers:
       enable: true
       url: http://www.gstatic.com/generate_204
       interval: 300
-      
+# ================= ZILNET META ==================
 dns:
   enable: true
   use-hosts: true
@@ -143,7 +144,7 @@ tun:
   dns-hijack: 
     - 0.0.0.0:53 # additional dns server listen on TUN
   auto-route: true # auto set global route
-  
+# ================= ZILNET META ==================
 rules:
 
   # network(tcp/udp) condition for all rules
@@ -162,7 +163,7 @@ rules:
   - GEOSITE,facebook,🚀 GSosmed
   - GEOSITE,youtube,🚀 GStrean
   - GEOSITE,geolocation-cn,DIRECT
-  - GEOSITE,geolocation-!cn,PROXY
+  - GEOSITE,geolocation-!cn,🚀 GLoadBalance
     
   # source IPCIDR condition for all rules in gateway proxy
   #- GEOSITE,geolocation-!cn,REJECT,192.168.1.88/32,192.168.1.99/32
