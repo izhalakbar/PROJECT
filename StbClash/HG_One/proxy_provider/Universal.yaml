@@ -12,7 +12,7 @@ proxies:
   servername: api.midtrans.com
   network: ws
   ws-opts:
-    path: ws://api.midtrans.com/fastssh/asew/62fd502c43c72/
+    path: ws://api.midtrans.com/fastssh/puniversal1/62fe7f0c920ad/
     headers:
       Host: sg2.vless.co
 - name: universal-two
@@ -26,6 +26,6 @@ proxies:
   servername: api.midtrans.com
   network: ws
   ws-opts:
-    path: ws://api.midtrans.com/fastssh/susah/62fd651ea75e6/
+    path: ws://api.midtrans.com/fastssh/puniversal2/62fe7f866a811/
     headers:
-      Host: sg1.vless.co
+      Host: sg2.vless.co
