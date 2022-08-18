@@ -10,25 +10,25 @@ rule-providers:
     type: file
     behavior: classical
     path: "./gaming.yaml"
-    url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/rule_provider/direct.yaml
+    url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/rule_provider/gaming.yaml
     interval: 86400
   RP-Reject:
     type: file
     behavior: classical
     path: "./reject.yaml"
-    url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/rule_provider/direct.yaml
+    url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/rule_provider/reject.yaml
     interval: 86400
   RP-Sosmed:
     type: file
     behavior: classical
     path: "./sosmed.yaml"
-    url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/rule_provider/direct.yaml
+    url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/rule_provider/sosmed.yaml
     interval: 86400
   RP-Streaming:
     type: file
     behavior: classical
     path: "./streaming.yaml"
-    url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/rule_provider/direct.yaml
+    url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/rule_provider/streaming.yaml
     interval: 86400
 # ================= ZILNET META ==================
 proxy-groups:
