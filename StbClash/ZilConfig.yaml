@@ -1,25 +1,32 @@
 ---
 rule-providers:
   RP-Direct:
-    type: file
+    type: http
     behavior: classical
+    url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/StbClash/rule_provider/direct.yaml
+    interval: 86400
     path: "./rule_provider/direct.yaml"
   RP-Gaming:
-    type: file
+    type: http
     behavior: classical
+    url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/StbClash/rule_provider/direct.yaml
     path: "./rule_provider/gaming.yaml"
   RP-Reject:
-    type: file
+    type: http
     behavior: classical
+    url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/StbClash/rule_provider/reject.yaml
     path: "./rule_provider/reject.yaml"
   RP-Sosmed:
-    type: file
+    type: http
     behavior: classical
+    url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/StbClash/rule_provider/sosmed.yaml
     path: "./rule_provider/sosmed.yaml"
   RP-Streaming:
-    type: file
+    type: http
     behavior: classical
+    url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/StbClash/rule_provider/streaming.yaml
     path: "./rule_provider/streaming.yaml"
+# ================= ZILNET META ==================
 proxy-groups:
 - name: GUniversal
   type: url-test
@@ -60,6 +67,44 @@ proxy-groups:
   disable-udp: false
   use:
   - PStream
+# ================= ZILNET META ==================
+proxy-providers:
+  PUniversal:
+    type: http
+    url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/StbClash/HG_One/proxy_provider/Universal.yaml
+    interval: 86400
+    path: "./proxy_provider/Universal.yaml"
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 300
+  PGame:
+    type: http
+    url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/StbClash/HG_One/proxy_provider/Game.yaml
+    interval: 86400
+    path: "./proxy_provider/Game.yaml"
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 300
+  PSosmed:
+    type: http
+    url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/StbClash/HG_One/proxy_provider/Sosmed.yaml
+    path: "./proxy_provider/Sosmed.yaml"
+    filter: sosmed
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 300
+  PStream:
+    type: http
+    url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/StbClash/HG_One/proxy_provider/Stream.yaml
+    path: "./proxy_provider/Stream.yaml"
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 300
+# ================= ZILNET META ==================
 dns:
   nameserver:
   - 192.168.8.1
@@ -111,36 +156,7 @@ rules:
 - RULE-SET,RP-Direct,DIRECT
 - RULE-SET,RP-Reject,REJECT
 - MATCH,GLOBAL
-proxy-providers:
-  PUniversal:
-    type: file
-    path: "./proxy_provider/Universal.yaml"
-    health-check:
-      enable: true
-      url: http://www.gstatic.com/generate_204
-      interval: 300
-  PGame:
-    type: file
-    path: "./proxy_provider/Game.yaml"
-    health-check:
-      enable: true
-      url: http://www.gstatic.com/generate_204
-      interval: 300
-  PSosmed:
-    type: file
-    path: "./proxy_provider/Sosmed.yaml"
-    filter: sosmed
-    health-check:
-      enable: true
-      url: http://www.gstatic.com/generate_204
-      interval: 300
-  PStream:
-    type: file
-    path: "./proxy_provider/Stream.yaml"
-    health-check:
-      enable: true
-      url: http://www.gstatic.com/generate_204
-      interval: 300
+# ================= ZILNET META ==================
 geodata-mode: false
 geodata-loader: memconservative
 tcp-concurrent: true
