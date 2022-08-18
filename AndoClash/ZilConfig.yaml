@@ -1,4 +1,3 @@
-
 ---
 rule-providers:
   RP-Direct:
@@ -68,17 +67,17 @@ proxy-groups:
   - PStream
 dns:
   nameserver:
-  - 192.168.8.1
-  - 192.168.9.1
-  - dhcp://"eth1"
-  - dhcp://"wwan0"
+  - 1.1.1.1
+  - 8.8.8.8
+  - tcp://1.1.1.1
+  - tcp://8.8.8.8
+  - https://doh.pub/dns-query
   - https://dns.adguard.com/dns-query
   - https://dns-google.com/dns-query
   - tls://dns.adguard.com
   - tls://dns-google.com/
-  - dhcp://"usb0"
+  - tls://223.5.5.5:853
   - 192.168.151.108
-  - 8.8.8.8
   - 8.8.4.4
   - https://dns.google/dns-query
   - tls://dns.google
@@ -89,8 +88,10 @@ dns:
   fake-ip-filter:
   - "+.*"
   default-nameserver:
-  - 192.168.9.1
-  - 192.168.8.1
+  - 1.1.1.1
+  - 1.0.0.1
+  - 119.29.29.29
+  - 114.114.114.114
   - 192.168.151.108
   - 8.8.8.8
   - 8.8.4.4
