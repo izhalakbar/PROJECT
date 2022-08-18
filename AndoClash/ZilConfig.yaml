@@ -201,7 +201,7 @@ rules:
   - RULE-SET,RP-Gaming,🚀 GGame
   - RULE-SET,RP-Sosmed,🚀 GSosmed
   - RULE-SET,RP-Streaming,🚀 GStream
-  - MATCH,🚀 GLoadBalance
+  - MATCH,GLOBAL
   
   
 
