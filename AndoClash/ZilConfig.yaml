@@ -4,55 +4,55 @@ rule-providers:
   RP-Direct:
     type: http
     behavior: classical
-    path: "./rule_provider/direct.yaml"
+    path: "./direct.yaml"
     url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/rule_provider/direct.yaml
     interval: 86400
   RP-Gaming:
     type: http
     behavior: classical
-    path: "./rule_provider/gaming.yaml"
+    path: "./gaming.yaml"
     url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/rule_provider/gaming.yaml
     interval: 86400
   RP-Reject:
     type: http
     behavior: classical
-    path: "./rule_provider/reject.yaml"
+    path: "./reject.yaml"
     url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/rule_provider/reject.yaml
     interval: 86400
   RP-Sosmed:
     type: http
     behavior: classical
-    path: "./rule_provider/sosmed.yaml"
+    path: "./sosmed.yaml"
     url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/rule_provider/sosmed.yaml
     interval: 86400
   RP-Streaming:
     type: http
     behavior: classical
-    path: "./rule_provider/streaming.yaml"
+    path: "./streaming.yaml"
     url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/rule_provider/streaming.yaml
     interval: 86400
 # ================= ZILNET META ==================
 proxy-providers:
   PUniversal:
     type: http
-    url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/proxy_provider/Universal.yaml
-    path: "./proxy_provider/Universal.yaml"
+    url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/Universal.yaml
+    path: "./Universal.yaml"
     health-check:
       enable: true
       url: http://www.gstatic.com/generate_204
       interval: 300
   PGame:
     type: http
-    url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/proxy_provider/Game.yaml
-    path: "./proxy_provider/Game.yaml"
+    url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/Game.yaml
+    path: "./Game.yaml"
     health-check:
       enable: true
       url: http://www.gstatic.com/generate_204
       interval: 300
   PSosmed:
     type: http
-    url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/proxy_provider/Sosmed.yaml
-    path: "./proxy_provider/Sosmed.yaml"
+    url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/Sosmed.yaml
+    path: "./Sosmed.yaml"
     filter: sosmed
     health-check:
       enable: true
@@ -60,8 +60,8 @@ proxy-providers:
       interval: 300
   PStream:
     type: http
-    url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/proxy_provider/Stream.yaml
-    path: "./proxy_provider/Stream.yaml"
+    url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/Stream.yaml
+    path: "./Stream.yaml"
     health-check:
       enable: true
       url: http://www.gstatic.com/generate_204
