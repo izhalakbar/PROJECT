@@ -141,8 +141,6 @@ rules:
   - IP-CIDR,198.18.0.1/16,REJECT,no-resolve
   - RULE-SET,RP-Direct,DIRECT
   - RULE-SET,RP-Reject,REJECT
-  - MATCH,GLOBAL
-      
   - RULE-SET,RP-Gaming,🚀 GGame
   - RULE-SET,RP-Sosmed,🚀 GSosmed
   - RULE-SET,RP-Streaming,🚀 GStream
