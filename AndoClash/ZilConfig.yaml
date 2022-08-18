@@ -6,22 +6,22 @@ rule-providers:
     path: "./rule_provider/direct.yaml"
     url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/rule_provider/direct.yaml
   RP-Gaming:
-    type: file
+    type: http
     behavior: classical
     path: "./rule_provider/gaming.yaml"
     url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/rule_provider/gaming.yaml
   RP-Reject:
-    type: file
+    type: http
     behavior: classical
     path: "./rule_provider/reject.yaml"
     url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/rule_provider/reject.yaml
   RP-Sosmed:
-    type: file
+    type: http
     behavior: classical
     path: "./rule_provider/sosmed.yaml"
     url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/rule_provider/sosmed.yaml
   RP-Streaming:
-    type: file
+    type: http
     behavior: classical
     path: "./rule_provider/streaming.yaml"
     url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/rule_provider/streaming.yaml
@@ -145,7 +145,7 @@ proxy-providers:
       url: http://www.gstatic.com/generate_204
       interval: 300
   PStream:
-    type: file
+    type: http
     url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/proxy_provider/Stream.yaml
     path: "./proxy_provider/Stream.yaml"
     health-check:
