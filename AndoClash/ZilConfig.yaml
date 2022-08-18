@@ -98,7 +98,7 @@ mode: rule
 log-level: silent
 allow-lan: true
 external-controller: 0.0.0.0:9090
-secret: reyre
+secret: ""
 bind-address: "*"
 external-ui: "/usr/share/openclash/ui"
 ipv6: false
