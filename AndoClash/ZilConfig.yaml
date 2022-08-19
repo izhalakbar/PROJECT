@@ -1,191 +1,162 @@
 ---
+# ================= ZILNET META ==================
 rule-providers:
   RP-Direct:
-    type: file
+    type: http
     behavior: classical
-    path: "./direct.yaml"
     url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/rule_provider/direct.yaml
-    interval: 86400
+    path: "./rule_provider/direct.yaml"
   RP-Gaming:
-    type: file
+    type: http
     behavior: classical
-    path: "./gaming.yaml"
     url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/rule_provider/gaming.yaml
-    interval: 86400
+    path: "./rule_provider/gaming.yaml"
   RP-Reject:
-    type: file
+    type: http
     behavior: classical
-    path: "./reject.yaml"
     url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/rule_provider/reject.yaml
-    interval: 86400
+    path: "./rule_provider/reject.yaml"
   RP-Sosmed:
-    type: file
+    type: http
     behavior: classical
-    path: "./sosmed.yaml"
     url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/rule_provider/sosmed.yaml
-    interval: 86400
+    path: "./rule_provider/sosmed.yaml"
   RP-Streaming:
-    type: file
+    type: http
     behavior: classical
-    path: "./streaming.yaml"
     url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/rule_provider/streaming.yaml
-    interval: 86400
+    path: "./rule_provider/streaming.yaml"
+# ================= ZILNET META ==================
+proxy-groups:
+- name: GUniversal
+  type: url-test
+  disable-udp: false
+  use:
+  - PUniversal
+  url: http://www.gstatic.com/generate_204
+  interval: '300'
+  tolerance: '150'
+  
+- name: GSosmed
+  type: select
+  disable-udp: false
+  use:
+  - PSosmed
+  url: http://www.gstatic.com/generate_204
+  interval: '300'
+  
+- name: GStream
+  type: select
+  disable-udp: false
+  use:
+  - PStream
+  
+- name: GGame
+  type: url-test
+  disable-udp: false
+  use:
+  - PGame
+  url: http://www.gstatic.com/generate_204
+  interval: '300'
+  tolerance: '150'
+  
 # ================= ZILNET META ==================
 proxy-providers:
   PUniversal:
     type: http
     url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/proxy_provider/Universal.yaml
-    interval: 3600
-    path: "./Universal.yaml"
+    path: "./proxy_provider/Universal.yaml"
+    interval: 86400
     health-check:
       enable: true
       url: http://www.gstatic.com/generate_204
       interval: 300
+      
   PGame:
     type: http
     url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/proxy_provider/Game.yaml
-    interval: 3600
-    path: "./Game.yaml"
+    path: "./proxy_provider/Game.yaml"
+    interval: 86400
     health-check:
       enable: true
       url: http://www.gstatic.com/generate_204
       interval: 300
+      
   PSosmed:
     type: http
     url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/proxy_provider/Sosmed.yaml
-    interval: 3600
-    path: "./Sosmed.yaml"
+    path: "./proxy_provider/Sosmed.yaml"
+    interval: 86400
     filter: sosmed
     health-check:
       enable: true
       url: http://www.gstatic.com/generate_204
       interval: 300
+      
   PStream:
     type: http
     url: https://raw.githubusercontent.com/izhalakbar/PROJECT/main/AndoClash/proxy_provider/Stream.yaml
-    interval: 3600
-    path: "./Stream.yaml"
+    path: "./proxy_provider/Stream.yaml"
+    interval: 86400
     health-check:
       enable: true
       url: http://www.gstatic.com/generate_204
       interval: 300
 # ================= ZILNET META ==================
-proxy-groups:
-  - name: 🚀 GUniversal
-    type: url-test
-    disable-udp: false
-    use:
-    - PUniversal
-    url: http://www.gstatic.com/generate_204
-    interval: 180
-    lazy: true
-    
-  - name: 🚀 GGame
-    type: url-test
-    disable-udp: false
-    use:
-    - PGame
-    url: http://www.gstatic.com/generate_204
-    interval: 180
-    lazy: true
-    
-  - name: 🚀 GLoadBalance
-    type: load-balance
-    strategy: consistent-hashing
-    disable-udp: false
-    proxies:
-    - 🚀 GUniversal
-    - 🚀 GGame
-    - 🚀 GSosmed
-    - 🚀 GStream
-    url: http://www.gstatic.com/generate_204
-    interval: 300
-    
-  - name: 🚀 GSosmed
-    type: select
-    disable-udp: false
-    use:
-    - PSosmed
-    filter: 'sosmed'
-    url: http://www.gstatic.com/generate_204
-    interval: 300
-  - name: 🚀 GStream
-    type: select
-    disable-udp: false
-    use:
-    - PStream
-    filter: 'streaming'
-# ================= ZILNET META ==================
 dns:
+  nameserver:
+  - 192.168.151.108
+  - 8.8.8.8
+  - 1.1.1.1
+  - https://dns.adguard.com/dns-query
+  - https://dns-google.com/dns-query
+  - tls://dns.adguard.com
+  - tls://dns-google.com/
+  - dhcp://"usb0"
+  - https://dns.google/dns-query
+  - tls://dns.google
   enable: true
-  use-hosts: true
   ipv6: false
   enhanced-mode: redir-host
-  fake-ip-range: 198.18.0.1/16
-  listen: 127.0.0.1:6868
+  listen: 0.0.0.0:7874
+  fake-ip-filter:
+  - "+.*"
   default-nameserver:
-    - 119.29.29.29
-    - 114.114.114.114
-  nameserver:
-    - https://doh.pub/dns-query
-    - tls://223.5.5.5:853
-  fallback:
-    - 'https://1.0.0.1/dns-query'  # append the proxy adapter name or group name to the end of DNS URL with '#' prefix.
-    - 'tls://8.8.4.4:853'
-  fallback-filter:
-    geoip: false
-    geosite:
-      - gfw  # `geosite` filter only use fallback server to resolve ip, prevent DNS leaks to unsafe DNS providers.
-    domain:
-      - +.example.com
-    ipcidr:
-      - 0.0.0.0/32
-      
-# Enable the TUN listener
-tun:
-  enable: true
-  stack: gvisor #  only gvisor
-  dns-hijack: 
-    - 0.0.0.0:53 # additional dns server listen on TUN
-  auto-route: true # auto set global route
+  - 192.168.151.108
+  - 8.8.4.4
+  - 1.0.0.1
+redir-port: 7892
+tproxy-port: 7895
+port: 7890
+socks-port: 7891
+mixed-port: 7893
+mode: rule
+log-level: silent
+allow-lan: true
+external-controller: 0.0.0.0:9090
+secret: ""
+bind-address: "*"
+external-ui: "/usr/share/openclash/ui"
+ipv6: false
 # ================= ZILNET META ==================
+profile:
+  store-selected: true
+  store-fake-ip: true
 rules:
-
-  # network(tcp/udp) condition for all rules
-  - DOMAIN-SUFFIX,bilibili.com,DIRECT,tcp
-  - DOMAIN-SUFFIX,bilibili.com,REJECT,udp
-    
-  # multiport condition for rules SRC-PORT and DST-PORT
-  - DST-PORT,123/136/137-139,DIRECT,udp
-  
-  # rule GEOSITE
-  - GEOSITE,category-ads-all,REJECT
-  - GEOSITE,icloud@cn,DIRECT
-  - GEOSITE,apple@cn,DIRECT
-  - GEOSITE,apple-cn,DIRECT
-  - GEOSITE,microsoft@cn,DIRECT
-  - GEOSITE,geolocation-cn,DIRECT
-  
-  - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
-  - IP-CIDR,10.0.0.0/8,DIRECT,no-resolve
-  - IP-CIDR,172.16.0.0/12,DIRECT,no-resolve
-  - IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
-  - IP-CIDR,100.64.0.0/10,DIRECT,no-resolve
-  - IP-CIDR6,::1/128,DIRECT,no-resolve
-  - IP-CIDR6,fc00::/7,DIRECT,no-resolve
-  - IP-CIDR6,fe80::/10,DIRECT,no-resolve
-  - IP-CIDR6,fd00::/8,DIRECT,no-resolve
-  - SRC-IP-CIDR,192.168.1.201/32,DIRECT
-  - IP-CIDR,198.18.0.1/16,REJECT,no-resolve
-  - GEOIP,IR,DIRECT
-    
-  # source IPCIDR condition for all rules in gateway proxy
-  #- GEOSITE,geolocation-!cn,REJECT,192.168.1.88/32,192.168.1.99/32
-
-  - GEOIP,private,DIRECT,no-resolve
-  - GEOIP,cn,DIRECT
-  - RULE-SET,RP-Gaming,🚀 GGame
-  - RULE-SET,RP-Sosmed,🚀 GSosmed
-  - RULE-SET,RP-Streaming,🚀 GStream
-  - MATCH,🚀 GLoadBalance
-  
+- DST-PORT,7895,REJECT
+- DST-PORT,7892,REJECT
+- IP-CIDR,198.18.0.1/16,REJECT,no-resolve
+- RULE-SET,RP-Direct,DIRECT
+- RULE-SET,RP-Reject,REJECT
+- MATCH,GLOBAL
+# ================= ZILNET META ==================
+geodata-mode: false
+geodata-loader: memconservative
+tcp-concurrent: true
+sniffer:
+  enable: true
+  sniffing:
+  - tls
+  - http
+authentication:
+- Clash:oHeRh67o
